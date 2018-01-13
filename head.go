@@ -1119,7 +1119,7 @@ func (s *memSeries) maxTime() int64 {
 
 func (s *memSeries) cut(mint int64) *memChunk {
 	c := &memChunk{
-		chunk:   chunkenc.NewXORChunk(),
+		chunk:   chunkenc.NewUnorderedChunk(),
 		minTime: mint,
 		maxTime: math.MinInt64,
 	}
@@ -1156,9 +1156,6 @@ func (s *memSeries) appendable(t int64, v float64) error {
 
 	if t > c.maxTime {
 		return nil
-	}
-	if t < c.maxTime {
-		return ErrOutOfOrderSample
 	}
 	// We are allowing exact duplicates as we can encounter them in valid cases
 	// like federation and erroring out at that time would be extremely noisy.
