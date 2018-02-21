@@ -364,7 +364,7 @@ func (h *Head) Truncate(mint int64) error {
 }
 
 // initTime initializes a head with the first timestamp. This only needs to be called
-// for a compltely fresh head with an empty WAL.
+// for a completely fresh head with an empty WAL.
 // Returns true if the initialization took an effect.
 func (h *Head) initTime(t int64) (initialized bool) {
 	// In the init state, the head has a high timestamp of math.MinInt64.
